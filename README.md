@@ -9,6 +9,4 @@ Variacion de la Impedancia de una bobina sobre un conductor seminfinito para dir
 # Mutual impedance of coils in arbitrary position (theo07)
 
 ![](1.png)
-
-
 ![](2.png)
