@@ -12,3 +12,4 @@ Variacion de la Impedancia de una bobina sobre un conductor seminfinito para dir
 ![](2.png)
 
 ![](6.png)
+<img src='6.png' width='600' />
