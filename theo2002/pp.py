@@ -47,9 +47,10 @@ class bpp():
             return (-b*cos(b*(yo+c))*sinh(k(a,b)*(zo+c)) +  b*cos(b*yo)*sinh(k(a,b)*zo) +   k(a,b)*sin(b*(yo+c))*cosh(k(a,b)*(zo+c)) - k(a,b)*sin(b*yo)*cosh(k(a,b)*zo)      )/(a**2+2*(b**2))
             
         def fxab(a,b):    
-            return 2*self.w*sigma*Ds(a,b)*fl(a,b)*exp(l(a,b)*self.z)*b
+            return 2*self.w*sigma*Ds(a,b)*fl(a,b)*exp(l(a,b)*z)*b
         def fyab(a,b):
-            return -2*self.w*sigma*Ds(a,b)*fl(a,b)*exp(l(a,b)*self.z)*a
+            return -2*self.w*sigma*Ds(a,b)*fl(a,b)*exp(l(a,b)*z)*a
+
         ifx = fxab(av[:,None], bv[None,:])
         ify = fyab(av[:,None], bv[None,:])
         Jx,Jy=fftshift(ifft2(ifftshift(np.nan_to_num(ifx.T)))).real,fftshift(ifft2(ifftshift(np.nan_to_num(ify.T)))).real
@@ -102,6 +103,23 @@ class bpp():
         plt.ylim([-1,1])
         plt.grid(True)
         return
+
+    def stream2(self,lim=1,titulo=''):
+        
+        Jx,Jy=self.jx,self.jy
+
+        self.getx2()
+        xv,yv=self.xv,self.yv
+
+
+
+        fig=plt.figure(figsize=[10,10])
+        lim=1
+        mask=np.abs(xv/1e-3)< lim
+        ax0 = fig.add_subplot()
+        ax0.streamplot(xv[mask]/1e-3,yv[mask]/1e-3,Jx[mask][:,mask],Jy[mask][:,mask])
+        ax0.grid(True)
+        return fig   
         
     def getxv(self,xm):
         self.xv=np.linspace(-xm,xm,200)
